@@ -22,6 +22,10 @@ This project replicates real SOC automation workflows used in enterprise environ
 - Validated connectivity between SOAR, Proxmox, and analyst workstation
 - Ensured secure access paths (SOAR isolated, analyst access via Proxmox/DC)
 
+<img width="370" height="717" alt="image" src="https://github.com/user-attachments/assets/6a4c8b9b-b0d4-48a2-9b94-3b393c09df15" />
+
+
+
 ---
 
 ### 1. Created a Custom StackStorm Pack (my_pack)
@@ -44,6 +48,7 @@ This project replicates real SOC automation workflows used in enterprise environ
  This action retuns
  
  <img width="360" height="261" alt="return" src="https://github.com/user-attachments/assets/3da8792a-57e3-46d0-888c-259aec1b0495" />
+ 
 ---
 
 ### 3. Built the Workflow (enrich_ip_flow.yaml)
