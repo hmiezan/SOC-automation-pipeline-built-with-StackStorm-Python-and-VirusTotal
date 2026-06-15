@@ -4,24 +4,35 @@ Automates the entire alert‑triage process by extracting IP addresses from raw 
 This project demonstrates practical security automation engineering: custom pack development, API integration, workflow orchestration, and automated alert delivery..
 
 ## Overview
-This project demonstrates how to build a real SOC automation workflow using StackStorm:
+The goal of this project was to build a fully automated enrichment and alerting pipeline capable of:
 
-- Extract an IP address from an alert
-- Enrich it using the VirusTotal API
-- Generate a structured enrichment object
-- Send an HTML email alert to the SOC team
-- Handle errors, transitions, and context publishing cleanly
+- Extracting indicators (IP addresses) from raw alerts
+- Enriching them using VirusTotal
+- Generating structured intelligence
+- Sending HTML‑formatted alerts to the SOC team
+- Running inside a segmented lab environment (VLAN 90 for SOAR, VLAN 200 for analyst workstation)
 
-This is a production‑grade automation pipeline suitable for SOC Level 1/2 workflows.
+This project replicates real SOC automation workflows used in enterprise environments.
 
+---
 ## Project Structure
-<img width="375" height="378" alt="ProjectStructure" src="https://github.com/user-attachments/assets/3ae74f03-9778-46bc-bd70-167a0e484d54" />
+ ### A- SOAR Platform Setup (StackStorm)
+- Installed StackStorm on a dedicated machine in VLAN 90
+- Configured system services, runners, and pack directories
+- Validated connectivity between SOAR, Proxmox, and analyst workstation
+- Ensured secure access paths (SOAR isolated, analyst access via Proxmox/DC)
+
+---
 
 ### 1. Created a Custom StackStorm Pack (my_pack)
+
+<img width="314" height="172" alt="image" src="https://github.com/user-attachments/assets/e21ab22b-3ba8-44ce-a7c7-4e2c5433d870" />
+
 - Initialized a new pack directory under /opt/stackstorm/packs/
 - Added required metadata (pack.yaml)
 - Created the folder structure for actions, workflows, and configs
-  
+
+---
 ### 2. Developed a Python Action for IP Extraction & VirusTotal Enrichment
 - Wrote enrich_ip.py to:
 - Parse an alert string
@@ -33,7 +44,7 @@ This is a production‑grade automation pipeline suitable for SOC Level 1/2 work
  This action retuns
  
  <img width="360" height="261" alt="return" src="https://github.com/user-attachments/assets/3da8792a-57e3-46d0-888c-259aec1b0495" />
-
+---
 
 ### 3. Built the Workflow (enrich_ip_flow.yaml)
 - Designed a multi‑step workflow that:
@@ -43,6 +54,7 @@ This is a production‑grade automation pipeline suitable for SOC Level 1/2 work
 - Sends an HTML email notification
 - Implemented Jinja templating for dynamic fields
 
+---
 ### 4. Installed & Configured the Email Pack
 - Installed the email pack > /opt/stackstorm/configs/email.yaml
 
